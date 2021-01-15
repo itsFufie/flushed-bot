@@ -80,9 +80,9 @@ function randomIndex(array) {
 
 async function playBaixo(msg) {
   const baixoArray = [
-    "https://cdn.glitch.com/1d3cabbe-820b-4143-a8e7-0e8dbdbad731%2Fbaixo2.mp3?v=1609781265782",
-    "https://cdn.glitch.com/1d3cabbe-820b-4143-a8e7-0e8dbdbad731%2Fbaixo.mp3?v=1609783515907",
-    "https://cdn.glitch.com/1d3cabbe-820b-4143-a8e7-0e8dbdbad731%2Fbaixo3.mp3?v=1609783523962"
+    "./assets/baixo.mp3",
+    "./assets/baixo2.mp3",
+    "./assets/baixo3.mp3"
   ];
   const broadcast = await client.voice.createBroadcast();
   broadcast.play(baixoArray[randomIndex(baixoArray)]);
@@ -92,7 +92,7 @@ async function playBaixo(msg) {
   });
 }
 async function playPsiu(msg) {
-  const psiuUrl = "https://cdn.glitch.com/1d3cabbe-820b-4143-a8e7-0e8dbdbad731%2Fei%20psiu.mkv?v=1610655250340";
+  const psiuUrl = "./assets/psiu.mkv";
   const broadcast = await client.voice.createBroadcast();
   broadcast.play(psiuUrl);
   const voiceChannel = msg.member.voice.channel;
