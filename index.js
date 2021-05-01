@@ -2,7 +2,9 @@ require("dotenv").config();
 const fetch = require("node-fetch");
 const Discord = require("discord.js");
 const client = new Discord.Client();
-client.login(process.env.DISCORDKEY);
+const DISCORDKEY = 'Nzk1MzU5MDU4MTIyODk5NDg2.X_IN2A.nDzXJJZ0RX3LPPhXlbPy7P20JHQ'
+const TENORKEY = 'YOBYQZK864N4'
+client.login(DISCORDKEY);
 client.on("ready", () => {
   console.log("ITS ALIVE!!!");
 });
@@ -30,6 +32,9 @@ function gotMessage(msg) {
   }
 
   if (msg.content.startsWith("!baixo")) {
+    if (msg.author.username == 'Mei') {
+      needGif('!gif rage')
+    }
     msg.channel.send('CHEGA SATUROU O MEME JA EU NAO AGUENTO MAAAAAAAAAAIS')
     msg.react('😡')
   }
@@ -62,7 +67,7 @@ async function needGif(msg) {
     searchGif = searchTokens.slice(1, searchTokens.length).join(" ");
     console.log(searchGif);
   }
-  let url = `https://api.tenor.com/v1/search?q=${searchGif}&key=${process.env.TENORKEY}&contentfilter=high`;
+  let url = `https://api.tenor.com/v1/search?q=${searchGif}&key=${TENORKEY}&contentfilter=high`;
   let response = await fetch(url);
   let gifResults = await response.json();
   const index = randomIndex(gifResults.results);
