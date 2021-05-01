@@ -1,7 +1,7 @@
 const TENORKEY = process.env.TENORKEY
 const fetch = require("node-fetch");
 
-export async function needGif(msg) {
+async function needGif(msg) {
     let searchTokens = msg.content.split(" ");
     console.log(searchTokens);
     let searchGif = "flushed_emoji";
@@ -20,3 +20,5 @@ export async function needGif(msg) {
 function randomIndex(array) {
     return Math.floor(Math.random() * array.length);
 }
+
+module.exports = needGif;
