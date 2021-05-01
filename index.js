@@ -1,9 +1,11 @@
 require("dotenv").config();
-const fetch = require("node-fetch");
+import needGif from './managing/searchGif'
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const DISCORDKEY = 'Nzk1MzU5MDU4MTIyODk5NDg2.X_IN2A.nDzXJJZ0RX3LPPhXlbPy7P20JHQ'
-const TENORKEY = 'YOBYQZK864N4'
+const DISCORDKEY = process.env.DISCORDKEY
+
+
+
 client.login(DISCORDKEY);
 client.on("ready", () => {
   console.log("ITS ALIVE!!!");
@@ -33,14 +35,16 @@ function gotMessage(msg) {
 
   if (msg.content.startsWith("!baixo")) {
     if (msg.author.username == 'Mei') {
-      needGif('!gif rage')
+      const gif = needGif('!gif rage')
+      msg.channel.send(gif)
     }
     msg.channel.send('CHEGA SATUROU O MEME JA EU NAO AGUENTO MAAAAAAAAAAIS')
     msg.react('😡')
   }
 
   if (msg.content.startsWith("!gif")) {
-    needGif(msg);
+    const gif = needGif(msg);
+    msg.channel.send(gif)
     msg.react('😳');
   }
 
@@ -59,24 +63,7 @@ function gotMessage(msg) {
 
 }
 
-async function needGif(msg) {
-  let searchTokens = msg.content.split(" ");
-  console.log(searchTokens);
-  let searchGif = "flushed_emoji";
-  if (searchTokens.length > 1) {
-    searchGif = searchTokens.slice(1, searchTokens.length).join(" ");
-    console.log(searchGif);
-  }
-  let url = `https://api.tenor.com/v1/search?q=${searchGif}&key=${TENORKEY}&contentfilter=high`;
-  let response = await fetch(url);
-  let gifResults = await response.json();
-  const index = randomIndex(gifResults.results);
 
-  msg.channel.send(gifResults.results[index].url);
-}
 
-function randomIndex(array) {
-  return Math.floor(Math.random() * array.length);
-}
 
 
