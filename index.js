@@ -1,5 +1,5 @@
 require("dotenv").config();
-import needGif from './managing/searchGif'
+const needGif = require('./managing/searchGif')
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const DISCORDKEY = process.env.DISCORDKEY
