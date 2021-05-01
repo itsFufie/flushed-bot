@@ -26,7 +26,7 @@ const replies = [
   "hello again, how are you? "
 ];
 
-function gotMessage(msg) {
+async function gotMessage(msg) {
   if (msg.content == "Hi, bot") {
     const authorName = msg.author.username;
     msg.channel.send(replies[randomIndex(replies)] + authorName);
@@ -43,7 +43,8 @@ function gotMessage(msg) {
   }
 
   if (msg.content.startsWith("!gif")) {
-    const gif = needGif(msg);
+    const gif = await needGif(msg)
+    console.log(gif)
     msg.channel.send(gif)
     msg.react('😳');
   }

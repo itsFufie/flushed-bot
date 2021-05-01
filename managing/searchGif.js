@@ -11,9 +11,12 @@ async function needGif(msg) {
     let url = `https://api.tenor.com/v1/search?q=${searchGif}&key=${TENORKEY}&contentfilter=high`;
     let response = await fetch(url);
     let gifResults = await response.json();
+    if (gifResults.results.length < 1) {
+        return 'nenhum gif encontrado para esta busca'
+    }
     const index = randomIndex(gifResults.results);
-
-    return (gifResults.results[index].url);
+    const res = gifResults.results[index].url;
+    return res;
 }
 
 
