@@ -1,9 +1,9 @@
 require("dotenv").config();
-const needGif = require('./managing/searchGif')
+const needGif = require('./managing/searchGif');
+const getDndInfo = require('./managing/dndapi');
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const DISCORDKEY = process.env.DISCORDKEY
-
 
 
 client.login(DISCORDKEY);
@@ -27,6 +27,9 @@ const replies = [
 ];
 
 async function gotMessage(msg) {
+  if (msg.content.startsWith("!dnd")) {
+    getDndInfo(msg);
+  }
   if (msg.content == "Hi, bot") {
     const authorName = msg.author.username;
     msg.channel.send(replies[randomIndex(replies)] + authorName);
@@ -35,7 +38,7 @@ async function gotMessage(msg) {
 
   if (msg.content.startsWith("!baixo")) {
     if (msg.author.username == 'Mei') {
-      const gif = needGif('!gif rage')
+      const gif = await needGif('!gif rage')
       msg.channel.send(gif)
     }
     msg.channel.send('CHEGA SATUROU O MEME JA EU NAO AGUENTO MAAAAAAAAAAIS')
